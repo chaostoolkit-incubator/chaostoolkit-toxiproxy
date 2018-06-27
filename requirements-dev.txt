@@ -1,0 +1,9 @@
+chaostoolkit-lib>=0.8.2
+pycodestyle
+requests
+coverage
+pytest>=2.8
+pytest-cov
+pytest-sugar
+mock
+tox==2.7.0
