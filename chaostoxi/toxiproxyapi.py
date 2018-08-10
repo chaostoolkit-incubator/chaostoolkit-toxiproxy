@@ -10,7 +10,8 @@ def create_proxy(proxy_json: Dict[str, str], configuration: Configuration):
     url = build_baseUrl(configuration)
     response = requests.post(url, json=proxy_json)
     if not response.ok:
-        logger.debug("Unable to create proxy, response code {} with {}".format(response.status_code, response.text))
+        logger.debug("Unable to create proxy, response code {} with {}".format(
+            response.status_code, response.text))
         return None
     return response.json()
 
@@ -21,7 +22,8 @@ def modify_proxy(proxy_name: str, proxy_json: Dict[str, any], configuration: Con
     logger.debug("Toxiproxy server API located at {}".format(url))
     response = requests.post(url, json=proxy_json)
     if response.ok:
-        logger.debug("Unable to create proxy, response code {} with {}".format(response.status_code, response.text))
+        logger.debug("Unable to create proxy, response code {} with {}".format(
+            response.status_code, response.text))
         return None
     return response.json()
 
@@ -32,9 +34,12 @@ def delete_proxy(proxy_name: str, configuration: Configuration):
     try:
         response = requests.delete(url)
         if not response.ok:
-            logger.warning("Unable to remove proxy from chaostoolkit with: {} received: {}".format(url, response.status_code))
+            logger.warning(
+                "Unable to remove proxy from chaostoolkit with: {} received: {}".format(
+                    url, response.status_code))
     except Exception:
-        logger.warning("Unable to remove proxy from chaostoolkit with: {}".format(url))
+        logger.warning(
+            "Unable to remove proxy from chaostoolkit with: {}".format(url))
 
 
 def read_proxy(proxy_name: str, configuration: Configuration):
@@ -46,7 +51,8 @@ def read_proxy(proxy_name: str, configuration: Configuration):
     return response.json()
 
 
-def create_toxic(proxy_name: str, toxic_json: Dict[str, any], configuration: Configuration):
+def create_toxic(proxy_name: str, toxic_json: Dict[str, any],
+                 configuration: Configuration):
     base_url = build_baseUrl(configuration)
     url = "{}/{}/toxics".format(base_url, proxy_name)
     response = requests.post(url, json=toxic_json)
