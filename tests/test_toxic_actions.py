@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import toxiproxy.toxic.actions as actions
+import chaostoxi.toxic.actions as actions
 import unittest
 from unittest import mock
 
@@ -7,7 +7,7 @@ from unittest import mock
 class TestActionMethods (unittest.TestCase):
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.create_toxic')
     def test_create_latency_toxic(self, toxiproxyapi_mock, mockconfig):
         request_json = {
             "name": "toxic1",
@@ -27,7 +27,7 @@ class TestActionMethods (unittest.TestCase):
         toxiproxyapi_mock.assert_called_once_with(proxy_name="foobar", toxic_json=request_json, configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.create_toxic')
     def test_create_latency_toxic_with_jitter(self, toxiproxyapi_mock, mockconfig):
         request_json = {
             "name": "jittery",
@@ -43,7 +43,7 @@ class TestActionMethods (unittest.TestCase):
         toxiproxyapi_mock.assert_called_once_with(proxy_name="foobar", toxic_json=request_json, configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.create_toxic')
     def test_create_bandwith_degradation_toxic(self, toxiproxyapi_mock, mockconfig):
         request_json = {
             "name": "bandwidth",
@@ -59,7 +59,7 @@ class TestActionMethods (unittest.TestCase):
         toxiproxyapi_mock.assert_called_once_with(proxy_name="foobar", toxic_json=request_json, configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.create_toxic')
     def test_create_slow_connection_close_toxic(self, toxiproxyapi_mock, mockconfig):
         request_json = {
             "name": "slowy",
@@ -75,7 +75,7 @@ class TestActionMethods (unittest.TestCase):
         toxiproxyapi_mock.assert_called_once_with(proxy_name="foobar", toxic_json=request_json, configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.create_toxic')
     def test_create_timeout_toxic(self, toxiproxyapi_mock, mockconfig):
         request_json = {
             "name": "timy",
@@ -91,7 +91,7 @@ class TestActionMethods (unittest.TestCase):
         toxiproxyapi_mock.assert_called_once_with(proxy_name="foobar", toxic_json=request_json, configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.create_toxic')
     def test_create_slicer_toxic(self, toxiproxyapi_mock, mockconfig):
         request_json = {
             "name": "hamslice",
@@ -107,7 +107,7 @@ class TestActionMethods (unittest.TestCase):
         toxiproxyapi_mock.assert_called_once_with(proxy_name="foobar", toxic_json=request_json, configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.create_toxic')
     def test_create_limiter_toxic(self, toxiproxyapi_mock, mockconfig):
         request_json = {
             "name": "limiteless",
@@ -123,7 +123,7 @@ class TestActionMethods (unittest.TestCase):
         toxiproxyapi_mock.assert_called_once_with(proxy_name="foobar", toxic_json=request_json, configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.delete_toxic')
+    @mock.patch('chaostoxi.toxiproxyapi.delete_toxic')
     def test_delete_toxic(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = True
         self.assertTrue(actions.delete_toxic(for_proxy="foobar", toxic_name="limiteless", configuration=mockconfig))

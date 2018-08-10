@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import toxiproxy.proxy.actions as actions
+import chaostoxi.proxy.actions as actions
 import unittest
 from unittest import mock
 from os import environ
@@ -8,7 +8,7 @@ from os import environ
 class TestActionMethods (unittest.TestCase):
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.create_proxy')
     def test_create_proxy_success(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = {
                 "name": "aproxy",
@@ -22,7 +22,7 @@ class TestActionMethods (unittest.TestCase):
         self.assertTrue(environ['proxyone_PORT'], '6660')
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.create_proxy')
     def test_create_proxy_from_env_success(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = {
                 "name": "aproxy",
@@ -39,7 +39,7 @@ class TestActionMethods (unittest.TestCase):
         self.assertTrue(environ['createproxy_PORT'], '8900')
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.create_proxy')
     def test_create_proxy_from_env_failure(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = {
                 "name": "aproxy",
@@ -51,7 +51,7 @@ class TestActionMethods (unittest.TestCase):
                                  upstream_port="env:DONT_EXISTS", configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.create_proxy')
     def test_create_proxy_http_error(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = None
         with self.assertRaises(AssertionError):
@@ -59,7 +59,7 @@ class TestActionMethods (unittest.TestCase):
                                  upstream_port="8080", configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.create_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.create_proxy')
     def test_create_proxy_bad_data(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = {
                 "name": "baddataproxy",
@@ -71,19 +71,19 @@ class TestActionMethods (unittest.TestCase):
                                  upstream_port="8080", configuration=mockconfig)
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.delete_proxy', autospec=True)
+    @mock.patch('chaostoxi.toxiproxyapi.delete_proxy', autospec=True)
     def test_delete_proxy(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = True
         self.assertTrue(actions.delete_proxy("some_proxy", mockconfig))
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.delete_proxy', autospec=True)
+    @mock.patch('chaostoxi.toxiproxyapi.delete_proxy', autospec=True)
     def test_delete_proxy_fail(self, toxiproxyapi_mock, mockconfig):
         toxiproxyapi_mock.return_value = False
         self.assertFalse(actions.delete_proxy("some_proxy", mockconfig))
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.modify_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.modify_proxy')
     def test_modify_proxy_everything(self, toxiproxyapi_mock, mockconfig):
         modify_json = {
             "listen": "127.0.0.1:6666",
@@ -102,7 +102,7 @@ class TestActionMethods (unittest.TestCase):
         mockconfig.__setitem__.assert_called_once_with('change_all_PORT', '6666')
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.modify_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.modify_proxy')
     def test_modify_proxy_listen(self, toxiproxyapi_mock, mockconfig):
         modify_json = {
             "listen": "0.0.0.0:43409",
@@ -120,7 +120,7 @@ class TestActionMethods (unittest.TestCase):
         mockconfig.__setitem__.assert_called_once_with('change_one_PORT', '43409')
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.modify_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.modify_proxy')
     def test_modify_proxy_upstream(self, toxiproxyapi_mock, mockconfig):
         modify_json = {
             "upstream": "10.10.10.10:1234",
@@ -136,7 +136,7 @@ class TestActionMethods (unittest.TestCase):
         mockconfig.__setitem__.assert_called_once_with('change_two_PORT', '6666')
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.modify_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.modify_proxy')
     def test_enable_proxy(self, toxiproxyapi_mock, mockconfig):
         modify_json = {
             "enabled": True
@@ -152,7 +152,7 @@ class TestActionMethods (unittest.TestCase):
         mockconfig.__setitem__.assert_called_once_with('enableproxy_PORT', '6666')
 
     @mock.patch('chaoslib.types.Configuration', spec_set=dict)
-    @mock.patch('toxiproxy.toxiproxyapi.modify_proxy')
+    @mock.patch('chaostoxi.toxiproxyapi.modify_proxy')
     def test_disable_proxy(self, toxiproxyapi_mock, mockconfig):
         modify_json = {
             "enabled": False

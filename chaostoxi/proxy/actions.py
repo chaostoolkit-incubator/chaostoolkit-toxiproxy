@@ -3,15 +3,16 @@ from chaoslib.types import Configuration
 
 from os import environ
 from logzero import logger
-import toxiproxy.toxiproxyapi as toxiproxyapi
+import chaostoxi.toxiproxyapi as toxiproxyapi
 
 
-__all__ = ["create_proxy", "disable_proxy", "enable_proxy", "modify_proxy", "delete_proxy"]
+__all__ = ["create_proxy", "disable_proxy", "enable_proxy", "modify_proxy",
+           "delete_proxy"]
 
 
 def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
-                 listen_host: str='0.0.0.0', listen_port: int=0, enabled: bool=True,
-                 configuration: Configuration = None):
+                 listen_host: str = '0.0.0.0', listen_port: int = 0,
+                 enabled: bool = True, configuration: Configuration = None):
     listen_address = "{}:{}".format(listen_host, str(listen_port))
     upstream_host = value_from_environment_if_exists(upstream_host)
     upstream_port = value_from_environment_if_exists(upstream_port)
@@ -23,8 +24,10 @@ def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
         "upstream": upstream_address,
         "enabled": enabled
     }
-    logger.debug("Creating proxy with the following configuration: {}".format(str(json)))
-    proxy = toxiproxyapi.create_proxy(proxy_json=json, configuration=configuration)
+    logger.debug("Creating proxy with the following configuration: {}".format(
+        str(json)))
+    proxy = toxiproxyapi.create_proxy(proxy_json=json,
+                                      configuration=configuration)
     if not proxy:
         raise AssertionError
     return_port = proxy["listen"].split(":")[-1]
@@ -36,20 +39,24 @@ def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
     entry = return_port
     configuration[config_key] = entry
     environ[config_key] = entry
-    logger.debug("toxyproxy port added to configuration object: {}".format(return_port))
+    logger.debug("toxyproxy port added to configuration object: {}".format(
+        return_port))
     return True
 
 
 def disable_proxy(proxy_name: str, configuration: Configuration = None):
-    return modify_proxy(proxy_name=proxy_name, enabled=False, configuration=configuration)
+    return modify_proxy(proxy_name=proxy_name, enabled=False,
+                        configuration=configuration)
 
 
 def enable_proxy(proxy_name: str, configuration: Configuration = None):
-    return modify_proxy(proxy_name=proxy_name, enabled=True, configuration=configuration)
+    return modify_proxy(proxy_name=proxy_name, enabled=True,
+                        configuration=configuration)
 
 
-def modify_proxy(proxy_name: str, listen_address: str=None, upstream_address: str=None,
-                 enabled: bool=None, configuration: Configuration = None):
+def modify_proxy(proxy_name: str, listen_address: str = None,
+                 upstream_address: str = None, enabled: bool = None,
+                 configuration: Configuration = None):
     json = {}
     if listen_address is not None:
         json['listen'] = listen_address
@@ -58,7 +65,8 @@ def modify_proxy(proxy_name: str, listen_address: str=None, upstream_address: st
     if enabled is not None:
         json['enabled'] = enabled
     logger.debug("Modifying proxy with the following data: {}".format(str(json)))
-    proxy = toxiproxyapi.modify_proxy(proxy_name=proxy_name, proxy_json=json, configuration=configuration)
+    proxy = toxiproxyapi.modify_proxy(proxy_name=proxy_name, proxy_json=json,
+                                      configuration=configuration)
     if not proxy:
         logger.error("Unable to modify proxy {}".format(proxy_name))
         raise AssertionError
@@ -71,7 +79,8 @@ def modify_proxy(proxy_name: str, listen_address: str=None, upstream_address: st
 
 
 def delete_proxy(proxy_name: str, configuration: Configuration = None):
-    return toxiproxyapi.delete_proxy(proxy_name=proxy_name, configuration=configuration)
+    return toxiproxyapi.delete_proxy(proxy_name=proxy_name,
+                                     configuration=configuration)
 
 
 def value_from_environment_if_exists(key: str):

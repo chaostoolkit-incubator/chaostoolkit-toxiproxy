@@ -1,10 +1,25 @@
 #!/usr/bin/env python
 """chaostoolkit-toxiproxy extension builder and installer"""
 
+import os
 import sys
 import io
 
 import setuptools
+
+def get_version_from_package() -> str:
+    """
+    Read the package version from the source without importing it.
+    """
+    path = os.path.join(os.path.dirname(__file__), "chaostoxi/__init__.py")
+    path = os.path.normpath(os.path.abspath(path))
+    with open(path) as f:
+        for line in f:
+            if line.startswith("__version__"):
+                token, version = line.split(" = ", 1)
+                version = version.replace("'", "").strip()
+                return version
+
 
 name = 'chaostoolkit-toxiproxy'
 desc = 'Chaos Toolkit Extension for managing toxiproxy from an experiment'
@@ -30,9 +45,9 @@ author_email = 'contact@chaostoolkit.org'
 url = 'http://chaostoolkit.org'
 license = 'Apache License Version 2.0'
 packages = [
-   'toxiproxy',
-   'toxiproxy.proxy',
-   'toxiproxy.toxic'
+   'chaostoxi',
+   'chaostoxi.proxy',
+   'chaostoxi.toxic'
  ]
 
 needs_pytest = set(['pytest', 'test']).intersection(sys.argv)
@@ -48,7 +63,7 @@ with io.open('requirements.txt') as f:
 
 setup_params = dict(
     name=name,
-    version='0.0.1',
+    version=get_version_from_package(),
     description=desc,
     long_description=long_desc,
     classifiers=classifiers,
