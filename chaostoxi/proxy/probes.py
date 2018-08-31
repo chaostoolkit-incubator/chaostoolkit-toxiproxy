@@ -4,8 +4,13 @@ from chaoslib.types import Configuration
 from logzero import logger
 import chaostoxi.toxiproxyapi as toxiproxyapi
 
+__all__ = ["proxy_exist", "get_proxy_attribute"]
+
 
 def proxy_exist(proxy_name: str, configuration: Configuration = None):
+    """
+    Returns True of False if a given proxy exists.
+    """
     proxy = toxiproxyapi.read_proxy(proxy_name=proxy_name,
                                     configuration=configuration)
     if proxy:
@@ -19,6 +24,9 @@ def proxy_exist(proxy_name: str, configuration: Configuration = None):
 
 def get_proxy_attribute(proxy_name: str, attribute: str,
                         configuration: Configuration = None):
+    """
+    Returns an attribute of a specified proxy.
+    """
     proxy = toxiproxyapi.read_proxy(proxy_name=proxy_name,
                                     configuration=configuration)
     if proxy:
