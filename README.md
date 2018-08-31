@@ -1,57 +1,21 @@
-# chaostoolkit-toxiproxy
-Welcome to the chaostoolkit extensions for ToxyProxy! This extension allows you to setup toxy proxy probes and methods from chaostoolkit by leveraging the toxyproxy [http management api](https://github.com/Shopify/toxiproxy#http-api). 
+# Chaos Toolkit Driver for Toxiproxy
 
-## Contribute
-If you wish to contribute more functions to this package, you are more than
-welcome to do so. Please, fork this project, make your changes following the
-usual [PEP 8][pep8] code style, sprinkling with tests and submit a PR for
-review.
+[![Build Status](https://travis-ci.org/chaostoolkit-incubator/chaostoolkit-toxiproxy.svg?branch=master)](https://travis-ci.org/chaostoolkit-incubator/haostoolkit-toxiproxy)
+[![Python versions](https://img.shields.io/pypi/pyversions/chaostoolkit-toxiproxy.svg)](https://www.python.org/)
 
-[pep8]: https://pycodestyle.readthedocs.io/en/latest/
+Welcome to the [Chaos Toolkit][chaostoolkit] driver for ToxyProxy! This extension allows you to setup toxy proxy probes and methods from chaostoolkit by leveraging the toxyproxy [http management api](https://github.com/Shopify/toxiproxy#http-api). 
 
-The Chaos Toolkit projects require all contributors must sign a
-[Developer Certificate of Origin][dco] on each commit they would like to merge
-into the master branch of the repository. Please, make sure you can abide by
-the rules of the DCO before submitting a PR.
+[chaostoolkit]: http://chaostoolkit.org
 
-[dco]: https://github.com/probot/dco#how-it-works
+## Install
 
-### Develop
-
-If you wish to develop on this project, make sure to install the development
-dependencies. But first, [create a virtual environment][venv] and then install
-those dependencies.
-
-[venv]: http://chaostoolkit.org/reference/usage/install/#create-a-virtual-environment
-
-```console
-$ pip install -r requirements-dev.txt -r requirements.txt
-```
-
-Then, point your environment to this directory:
-
-```console
-$ python setup.py develop
-```
-
-Now, you can edit the files and they will be automatically be seen by your
-environment, even when running from the `chaos` command locally.
-
-### Test
-
-To run the tests for the project execute the following:
-
-```
-$ pytest
-```
-##Install
 This package requires Python 3.5+
 
 To be used from your experiment, this package must be installed in the Python
 environment where [chaostoolkit][] already lives.
 
 ```
-$ pip install -U chaostoolkit-istio
+$ pip install -U chaostoolkit-toxiproxy
 ```
 
 ## Usage
@@ -78,7 +42,8 @@ All actions and probes in the extension are of python type and are used like any
 
 ### Proxy actions
 
-####create_proxy
+#### create_proxy
+
 Creates a proxy to which toxics can be added. In toxiproxy a listen port of value 0 tells the API to assign a random available port. The value where the proxy is listenting will be attached to the **chaostoolkit configuration object** as *\<proxyname\>_PORT*. Should the creation of the proxy fail, an assertion error is raised stopping all subsequent actions.
 
 |Argument|Description|Required|Default|
@@ -90,7 +55,8 @@ Creates a proxy to which toxics can be added. In toxiproxy a listen port of valu
 |listen_port|port to listen for requests, 0 means pick random value|No|0|
 |enabled| Whether to start listening or not|No|True|
 
-####modify_proxy
+#### modify_proxy
+
 Modify the configuration of a given proxy. Useful to change the upstream configiuration. Only arguments supplied result in modification of the proxy.
 
 |Argument|Description|Required|Default|
@@ -100,7 +66,8 @@ Modify the configuration of a given proxy. Useful to change the upstream configi
 |upstream_addres|ip:port of the upstream|No|None|
 |enabled| Toggle enabled/disabled state|No|None|
 
-####disable_proxy
+#### disable_proxy
+
 Disables the proxy, this is useful to simulate a proxied service being down.
 
 |Argument|Description|Required|Default|
@@ -108,14 +75,16 @@ Disables the proxy, this is useful to simulate a proxied service being down.
 |proxy_name|name for the proxy to disable|Yes|None|
 
 
-####enable_proxy
+#### enable_proxy
+
 Enables a disabled proxy.
 
 |Argument|Description|Required|Default|
 |--------|-----------|--------|-------|
 |proxy_name|name for the proxy to enable|Yes|None|
 
-####delete_proxy
+#### delete_proxy
+
 Removes the proxy from the system.
 
 Example usage
@@ -144,7 +113,7 @@ Example usage
 ```
 ### Proxy pobes
 
-####proxy_exits
+#### proxy_exits
 
 Returns True of False if a given proxy exists.
 
@@ -288,7 +257,13 @@ environment, even when running from the `chaos` command locally.
 
 ### Test
 
-To run the tests for the project execute the following:
+To run the unit tests for the project execute the following:
+
+```
+$ pytest
+```
+
+To run the integration tests for the project execute the following:
 
 ```
 $ tox
