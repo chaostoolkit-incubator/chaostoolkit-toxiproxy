@@ -3,8 +3,9 @@
 [![Build Status](https://travis-ci.org/chaostoolkit-incubator/chaostoolkit-toxiproxy.svg?branch=master)](https://travis-ci.org/chaostoolkit-incubator/haostoolkit-toxiproxy)
 [![Python versions](https://img.shields.io/pypi/pyversions/chaostoolkit-toxiproxy.svg)](https://www.python.org/)
 
-Welcome to the [Chaos Toolkit][chaostoolkit] driver for ToxyProxy! This extension allows you to setup toxy proxy probes and methods from chaostoolkit by leveraging the toxyproxy [http management api](https://github.com/Shopify/toxiproxy#http-api). 
+Welcome to the [Chaos Toolkit][chaostoolkit] driver for [Toxiproxy][toxiproxy]! This extension allows you to setup toxy proxy probes and methods from chaostoolkit by leveraging the toxyproxy [http management api](https://github.com/Shopify/toxiproxy#http-api). 
 
+[toxiproxy]: https://github.com/Shopify/toxiproxy
 [chaostoolkit]: http://chaostoolkit.org
 
 ## Install
