@@ -13,6 +13,9 @@ __all__ = ["create_proxy", "disable_proxy", "enable_proxy", "modify_proxy",
 def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
                  listen_host: str = '0.0.0.0', listen_port: int = 0,
                  enabled: bool = True, configuration: Configuration = None):
+    """
+    Creates a proxy to which toxics can be added.
+    """
     listen_address = "{}:{}".format(listen_host, str(listen_port))
     upstream_host = value_from_environment_if_exists(upstream_host)
     upstream_port = value_from_environment_if_exists(upstream_port)
@@ -45,11 +48,17 @@ def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
 
 
 def disable_proxy(proxy_name: str, configuration: Configuration = None):
+    """
+    Disables the proxy, this is useful to simulate a proxied service being down.
+    """
     return modify_proxy(proxy_name=proxy_name, enabled=False,
                         configuration=configuration)
 
 
 def enable_proxy(proxy_name: str, configuration: Configuration = None):
+    """
+    Enables a disabled proxy.
+    """
     return modify_proxy(proxy_name=proxy_name, enabled=True,
                         configuration=configuration)
 
@@ -57,6 +66,11 @@ def enable_proxy(proxy_name: str, configuration: Configuration = None):
 def modify_proxy(proxy_name: str, listen_address: str = None,
                  upstream_address: str = None, enabled: bool = None,
                  configuration: Configuration = None):
+    """
+    Modify the configuration of a given proxy.
+    Useful to change the upstream configiuration.
+    Only arguments supplied result in modification of the proxy.
+    """
     json = {}
     if listen_address is not None:
         json['listen'] = listen_address
@@ -79,6 +93,9 @@ def modify_proxy(proxy_name: str, listen_address: str = None,
 
 
 def delete_proxy(proxy_name: str, configuration: Configuration = None):
+    """
+    Removes the proxy from the system.
+    """
     return toxiproxyapi.delete_proxy(proxy_name=proxy_name,
                                      configuration=configuration)
 

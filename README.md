@@ -113,7 +113,7 @@ Example usage
 ```
 ### Proxy pobes
 
-#### proxy_exits
+#### proxy_exist
 
 Returns True of False if a given proxy exists.
 
@@ -126,6 +126,7 @@ Returns True of False if a given proxy exists.
 All actions provided by this extension match the types and attributes of [toxics](https://github.com/Shopify/toxiproxy#toxics). 
 
 #### create\_toxic
+
 Allows you to create any of the supported types of toxics with their attributes. 
 
 |Argument|Description|Required|Default|
@@ -138,6 +139,7 @@ Allows you to create any of the supported types of toxics with their attributes.
 |attributes|Dictionary of attributes for the type of toxic|No|None|
 
 #### create\_latency\_toxic
+
 Add a delay to all data going through the proxy using a downstream with a toxicity of 100%.
 
 |Argument|Description|Required|Default|
@@ -148,6 +150,7 @@ Add a delay to all data going through the proxy using a downstream with a toxici
 |jitter| time in milliseconds to jitter|No|0
 
 #### create\_bandwith\_degradation\_toxic
+
 Limit the bandwith of a  downstream connection with a toxicity of 100%.
 
 |Argument|Description|Required|Default|
@@ -157,7 +160,8 @@ Limit the bandwith of a  downstream connection with a toxicity of 100%.
 |rate| desired bandwith rate in KB/s| Yes|None|
 
 #### create\_slow\_connection\_close\_toxic
-Generate as downstream delayed TCP close with a toxicity of 100%
+
+Generate as downstream delayed TCP close with a toxicity of 100%.
 
 |Argument|Description|Required|Default|
 |--------|-----------|--------|-------|
@@ -166,7 +170,8 @@ Generate as downstream delayed TCP close with a toxicity of 100%
 |delay| desired close delay in milliseconds| Yes|None|
 
 #### create\_slicer\_toxic
-Slices TCP data up into small bits, optionally adding a delay between each sliced "packet" with a toxicity of 100%
+
+Slices TCP data up into small bits, optionally adding a delay between each sliced "packet" with a toxicity of 100%.
 
 |Argument|Description|Required|Default|
 |--------|-----------|--------|-------|
@@ -177,7 +182,8 @@ Slices TCP data up into small bits, optionally adding a delay between each slice
 |delay| time in microseconds to delay each packet by|Yes|None
 
 #### create\_limiter\_toxic
-Closes connections when transmitted data after the limit, sets it up as a dowsntream, 100% toxiciy.
+
+Closes connections when transmitted data after the limit, sets it up as a dowsntream, 100% toxicity.
 
 |Argument|Description|Required|Default|
 |--------|-----------|--------|-------|
@@ -186,7 +192,8 @@ Closes connections when transmitted data after the limit, sets it up as a dowsnt
 |bytes| number of bytes to transmit before connection is closed| Yes|None|
 
 #### delete\_toxic
-Deletes the a given toxic 
+
+Deletes the a given toxic.
 
 |Argument|Description|Required|Default|
 |--------|-----------|--------|-------|

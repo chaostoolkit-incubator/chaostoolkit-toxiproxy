@@ -5,9 +5,19 @@ from logzero import logger
 import chaostoxi.toxiproxyapi as toxiproxyapi
 from typing import Dict
 
+__all__ = ["delete_toxic", "create_toxic", "create_latency_toxic",
+           "create_bandwith_degradation_toxic",
+           "create_slow_connection_close_toxic",
+           "create_timeout_toxic",
+           "create_slicer_toxic",
+           "create_limiter_toxic"]
+
 
 def delete_toxic(for_proxy: str, toxic_name: str,
                  configuration: Configuration = None):
+    """
+    Deletes the a given toxic.
+    """
     return toxiproxyapi.delete_toxic(proxy_name=for_proxy,
                                      toxic_name=toxic_name,
                                      configuration=configuration)
@@ -17,6 +27,10 @@ def create_toxic(for_proxy: str, toxic_name: str, toxic_type: str,
                  stream: str = "downstream", toxicity: float = 1.0,
                  attributes: Dict[str, any] = None,
                  configuration: Configuration = None):
+    """
+    Allows you to create any of the supported types of toxics
+    with their attributes.
+    """
     logger.info("Creating toxy {} for proxy {} with type: {} as a {} with toxicity {} and attributes {}"
                 .format(toxic_name, for_proxy, toxic_type, stream,
                         str(toxicity), str(attributes)))
@@ -34,6 +48,10 @@ def create_toxic(for_proxy: str, toxic_name: str, toxic_type: str,
 
 def create_latency_toxic(for_proxy: str, toxic_name: str, latency: int,
                          jitter: int = 0, configuration: Configuration = None):
+    """
+    Add a delay to all data going through the proxy using a downstream
+    with a toxicity of 100%.
+    """
     attributes = {
         "latency": latency,
         "jitter": jitter
@@ -46,6 +64,9 @@ def create_latency_toxic(for_proxy: str, toxic_name: str, latency: int,
 def create_bandwith_degradation_toxic(for_proxy: str, toxic_name: str,
                                       rate: int,
                                       configuration: Configuration = None):
+    """
+    Limit the bandwith of a  downstream connection with a toxicity of 100%.
+    """
     attributes = {
         "rate": rate
     }
@@ -57,6 +78,9 @@ def create_bandwith_degradation_toxic(for_proxy: str, toxic_name: str,
 def create_slow_connection_close_toxic(for_proxy: str, toxic_name: str,
                                        delay: int,
                                        configuration: Configuration = None):
+    """
+    Limit the bandwith of a  downstream connection with a toxicity of 100%.
+    """
     attributes = {
         "delay": delay
     }
@@ -67,6 +91,9 @@ def create_slow_connection_close_toxic(for_proxy: str, toxic_name: str,
 
 def create_timeout_toxic(for_proxy: str, toxic_name: str, timeout: int,
                          configuration: Configuration = None):
+    """
+    Generate as downstream delayed TCP close with a toxicity of 100%.
+    """
     attributes = {
         "timeout": timeout
     }
@@ -78,6 +105,10 @@ def create_timeout_toxic(for_proxy: str, toxic_name: str, timeout: int,
 def create_slicer_toxic(for_proxy: str, toxic_name: str, average_size: int,
                         size_variation: int, delay: int,
                         configuration: Configuration = None):
+    """
+    Slices TCP data up into small bits, optionally adding a delay between
+    each sliced "packet" with a toxicity of 100%.
+    """
     attributes = {
         "average_size": average_size,
         "size_variation": size_variation,
@@ -90,6 +121,10 @@ def create_slicer_toxic(for_proxy: str, toxic_name: str, average_size: int,
 
 def create_limiter_toxic(for_proxy: str, toxic_name: str, bytes_limit: int,
                          configuration: Configuration = None):
+    """
+    Closes connections when transmitted data after the limit,
+    sets it up as a dowsntream, 100% toxicity.
+    """
     attributes = {
         "bytes": bytes_limit
     }
