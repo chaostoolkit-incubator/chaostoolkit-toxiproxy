@@ -2,7 +2,17 @@
 
 ## [Unreleased][]
 
-[Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.2...HEAD
+[Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.3...HEAD
+
+## [0.1.3][]
+
+[0.1.3]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.2...0.1.3
+
+### Changed
+
+-   delint
+-   use the appropriate typing annotation `Any` instead of `any` which is a builtin
+    function
 
 ## [0.1.2][]
 
