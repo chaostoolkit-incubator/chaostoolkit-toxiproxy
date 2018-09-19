@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from chaoslib.types import Configuration
+from typing import Any, Dict
 
+from chaoslib.types import Configuration
 from logzero import logger
+
 import chaostoxi.toxiproxyapi as toxiproxyapi
-from typing import Dict
 
 __all__ = ["delete_toxic", "create_toxic", "create_latency_toxic",
            "create_bandwith_degradation_toxic",
@@ -25,15 +26,17 @@ def delete_toxic(for_proxy: str, toxic_name: str,
 
 def create_toxic(for_proxy: str, toxic_name: str, toxic_type: str,
                  stream: str = "downstream", toxicity: float = 1.0,
-                 attributes: Dict[str, any] = None,
-                 configuration: Configuration = None):
+                 attributes: Dict[str, Any] = None,
+                 configuration: Configuration = None) -> bool:
     """
     Allows you to create any of the supported types of toxics
     with their attributes.
     """
-    logger.info("Creating toxy {} for proxy {} with type: {} as a {} with toxicity {} and attributes {}"
-                .format(toxic_name, for_proxy, toxic_type, stream,
-                        str(toxicity), str(attributes)))
+    logger.info(
+        "Creating toxy {} for proxy {} with type: {} as a {} with toxicity {} "
+        "and attributes {}".format(
+            toxic_name, for_proxy, toxic_type, stream,
+            str(toxicity), str(attributes)))
     json = {"name": toxic_name,
             "type": toxic_type,
             "stream": stream,
@@ -47,7 +50,8 @@ def create_toxic(for_proxy: str, toxic_name: str, toxic_type: str,
 
 
 def create_latency_toxic(for_proxy: str, toxic_name: str, latency: int,
-                         jitter: int = 0, configuration: Configuration = None):
+                         jitter: int = 0,
+                         configuration: Configuration = None) -> Dict[str, Any]:
     """
     Add a delay to all data going through the proxy using a downstream
     with a toxicity of 100%.
@@ -63,7 +67,7 @@ def create_latency_toxic(for_proxy: str, toxic_name: str, latency: int,
 
 def create_bandwith_degradation_toxic(for_proxy: str, toxic_name: str,
                                       rate: int,
-                                      configuration: Configuration = None):
+                                      configuration: Configuration = None) -> Dict[str, Any]:
     """
     Limit the bandwith of a  downstream connection with a toxicity of 100%.
     """
@@ -77,7 +81,7 @@ def create_bandwith_degradation_toxic(for_proxy: str, toxic_name: str,
 
 def create_slow_connection_close_toxic(for_proxy: str, toxic_name: str,
                                        delay: int,
-                                       configuration: Configuration = None):
+                                       configuration: Configuration = None) -> Dict[str, Any]:
     """
     Limit the bandwith of a  downstream connection with a toxicity of 100%.
     """
@@ -90,7 +94,7 @@ def create_slow_connection_close_toxic(for_proxy: str, toxic_name: str,
 
 
 def create_timeout_toxic(for_proxy: str, toxic_name: str, timeout: int,
-                         configuration: Configuration = None):
+                         configuration: Configuration = None) -> Dict[str, Any]:
     """
     Generate as downstream delayed TCP close with a toxicity of 100%.
     """
@@ -104,7 +108,7 @@ def create_timeout_toxic(for_proxy: str, toxic_name: str, timeout: int,
 
 def create_slicer_toxic(for_proxy: str, toxic_name: str, average_size: int,
                         size_variation: int, delay: int,
-                        configuration: Configuration = None):
+                        configuration: Configuration = None) -> Dict[str, Any]:
     """
     Slices TCP data up into small bits, optionally adding a delay between
     each sliced "packet" with a toxicity of 100%.
@@ -120,7 +124,7 @@ def create_slicer_toxic(for_proxy: str, toxic_name: str, average_size: int,
 
 
 def create_limiter_toxic(for_proxy: str, toxic_name: str, bytes_limit: int,
-                         configuration: Configuration = None):
+                         configuration: Configuration = None) -> Dict[str, Any]:
     """
     Closes connections when transmitted data after the limit,
     sets it up as a dowsntream, 100% toxicity.

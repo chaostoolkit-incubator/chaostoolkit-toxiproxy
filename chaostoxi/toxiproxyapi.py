@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-import requests
+from typing import Any, Dict
+
 
 from chaoslib.types import Configuration
 from logzero import logger
-from typing import Dict
+import requests
 
 
-def create_proxy(proxy_json: Dict[str, str], configuration: Configuration):
+def create_proxy(proxy_json: Dict[str, str],
+                 configuration: Configuration) -> Dict[str, Any]:
     url = build_baseUrl(configuration)
     response = requests.post(url, json=proxy_json)
     if not response.ok:
@@ -16,7 +18,8 @@ def create_proxy(proxy_json: Dict[str, str], configuration: Configuration):
     return response.json()
 
 
-def modify_proxy(proxy_name: str, proxy_json: Dict[str, any], configuration: Configuration):
+def modify_proxy(proxy_name: str, proxy_json: Dict[str, Any],
+                 configuration: Configuration) -> Dict[str, Any]:
     base_url = build_baseUrl(configuration)
     url = "{}/{}".format(base_url, proxy_name)
     logger.debug("Toxiproxy server API located at {}".format(url))
@@ -28,21 +31,22 @@ def modify_proxy(proxy_name: str, proxy_json: Dict[str, any], configuration: Con
     return response.json()
 
 
-def delete_proxy(proxy_name: str, configuration: Configuration):
+def delete_proxy(proxy_name: str, configuration: Configuration) -> None:
     base_url = build_baseUrl(configuration)
     url = "{}/{}".format(base_url, proxy_name)
     try:
         response = requests.delete(url)
         if not response.ok:
             logger.warning(
-                "Unable to remove proxy from chaostoolkit with: {} received: {}".format(
-                    url, response.status_code))
+                "Unable to remove proxy from chaostoolkit with: {} received: "
+                "{}".format(url, response.status_code))
     except Exception:
         logger.warning(
             "Unable to remove proxy from chaostoolkit with: {}".format(url))
 
 
-def read_proxy(proxy_name: str, configuration: Configuration):
+def read_proxy(proxy_name: str,
+               configuration: Configuration) -> Dict[str, Any]:
     base_url = build_baseUrl(configuration)
     url = "{}/{}".format(base_url, proxy_name)
     response = requests.get(url)
@@ -51,8 +55,8 @@ def read_proxy(proxy_name: str, configuration: Configuration):
     return response.json()
 
 
-def create_toxic(proxy_name: str, toxic_json: Dict[str, any],
-                 configuration: Configuration):
+def create_toxic(proxy_name: str, toxic_json: Dict[str, Any],
+                 configuration: Configuration) -> Dict[str, Any]:
     base_url = build_baseUrl(configuration)
     url = "{}/{}/toxics".format(base_url, proxy_name)
     response = requests.post(url, json=toxic_json)
@@ -62,14 +66,15 @@ def create_toxic(proxy_name: str, toxic_json: Dict[str, any],
     return response.json()
 
 
-def delete_toxic(proxy_name: str, toxic_name, configuration: Configuration):
+def delete_toxic(proxy_name: str, toxic_name,
+                 configuration: Configuration) -> int:
     base_url = build_baseUrl(configuration)
     url = "{}/{}/toxics/{}".format(base_url, proxy_name, toxic_name)
     response = requests.delete(url)
     return response.ok
 
 
-def build_baseUrl(configuration: Configuration):
+def build_baseUrl(configuration: Configuration) -> str:
     toxiproxy_host = configuration.get("toxiproxy_host")
     toxiproxy_port = configuration.get("toxiproxy_port")
     if not toxiproxy_port:
