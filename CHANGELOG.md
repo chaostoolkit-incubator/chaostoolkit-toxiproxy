@@ -2,7 +2,13 @@
 
 ## [Unreleased][]
 
-[Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.2...HEAD
+
+## [0.1.2][]
+
+[0.1.2]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.1...0.1.2
+
+Just so that we can re-upload to Pypi...
 
 ## [0.1.1][]
 
