@@ -24,8 +24,8 @@ def modify_proxy(proxy_name: str, proxy_json: Dict[str, Any],
     url = "{}/{}".format(base_url, proxy_name)
     logger.debug("Toxiproxy server API located at {}".format(url))
     response = requests.post(url, json=proxy_json)
-    if response.ok:
-        logger.debug("Unable to create proxy, response code {} with {}".format(
+    if not response.ok:
+        logger.debug("Unable to modify proxy, response code {} with {}".format(
             response.status_code, response.text))
         return None
     return response.json()
