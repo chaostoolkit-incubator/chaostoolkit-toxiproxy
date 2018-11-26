@@ -4,6 +4,10 @@
 
 [Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.3...HEAD
 
+### Changed
+
+- Fixed modify_proxy action: Does not error on a successful call and returns proper error message
+
 ## [0.1.3][]
 
 [0.1.3]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.2...0.1.3
