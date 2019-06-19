@@ -101,7 +101,10 @@ def delete_proxy(proxy_name: str, configuration: Configuration = None):
 
 
 def value_from_environment_if_exists(key: str):
-    if key.startswith("env:"):
+    """
+    Replace key with an environment variable if it has prefix `env:`
+    """
+    if isinstance(key, str) and key.startswith("env:"):
         env_key = key[4:]
         logger.debug("Resolving from environment variable: {}".format(env_key))
         return environ[env_key]
