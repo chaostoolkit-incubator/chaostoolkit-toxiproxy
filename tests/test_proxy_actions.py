@@ -16,7 +16,7 @@ class TestActionMethods (unittest.TestCase):
                 "upstream": "10.28.188.118:6040"
         }
         self.assertTrue(actions.create_proxy(proxy_name="proxyone", listen_port=0, upstream_host="127.0.0.1",
-                                             upstream_port="8080", configuration=mockconfig))
+                                             upstream_port=8080, configuration=mockconfig))
         # the action has the side effect of adding the proxy port into the config with the key proxyname_PORT
         mockconfig.__setitem__.assert_called_once_with('proxyone_PORT', '6660')
         self.assertTrue(environ['proxyone_PORT'], '6660')
