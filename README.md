@@ -97,7 +97,7 @@ Example usage
             "name": "setup_toxiproxy_proxy",
             "provider": {
                 "type": "python",
-                "module": "toxiproxy.proxy.actions",
+                "module": "chaostoxi.proxy.actions",
                 "func": "create_proxy",
                 "arguments": {
                     "proxy_name": "myproxy",
