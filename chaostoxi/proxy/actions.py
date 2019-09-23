@@ -7,7 +7,7 @@ import chaostoxi.toxiproxyapi as toxiproxyapi
 
 
 __all__ = ["create_proxy", "disable_proxy", "enable_proxy", "modify_proxy",
-           "delete_proxy"]
+           "delete_proxy", "reset"]
 
 
 def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
@@ -98,6 +98,12 @@ def delete_proxy(proxy_name: str, configuration: Configuration = None):
     """
     return toxiproxyapi.delete_proxy(proxy_name=proxy_name,
                                      configuration=configuration)
+
+def reset(configuration: Configuration = None):
+    """
+    Enable all proxies and remove all active toxics
+    """
+    return toxiproxyapi.reset(configuration=configuration)
 
 
 def value_from_environment_if_exists(key: str):
