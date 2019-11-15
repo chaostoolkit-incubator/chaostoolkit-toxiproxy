@@ -4,6 +4,10 @@
 
 [Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.2.0...HEAD
 
+### Added
+
+- Build Python 3.7 too
+
 ## [0.2.0][]
 
 [0.2.0]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.1.3...0.2.0
