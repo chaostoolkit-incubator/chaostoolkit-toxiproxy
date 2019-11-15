@@ -7,6 +7,7 @@
 ### Added
 
 - Build Python 3.7 too
+- Specify readme format for Pypi
 
 ## [0.2.0][]
 
