@@ -7,6 +7,7 @@
 ### Changed
 
 - Fixed modify_proxy action: Does not error on a successful call and returns proper error message
+- Add support for [reset endpoint](https://github.com/Shopify/toxiproxy#endpoints)
 
 ## [0.1.3][]
 

@@ -112,6 +112,29 @@ Example usage
         }
       ] 
 ```
+
+#### reset
+
+Enable all proxies and remove all active toxics.
+
+Example usage:  
+```json
+"method": [
+    {
+        "type": "action",
+        "name": "reset all proxies",
+        "provider": {
+            "type": "python",
+            "module": "chaostoxi.proxy.actions",
+            "func": "reset"
+        },
+        "pauses": {
+            "after": 1
+        }
+    }
+]
+```
+
 ### Proxy pobes
 
 #### proxy_exist
