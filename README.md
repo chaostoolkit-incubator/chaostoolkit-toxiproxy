@@ -9,8 +9,7 @@ Welcome to the [Chaos Toolkit][chaostoolkit] driver for [Toxiproxy][toxiproxy]! 
 [chaostoolkit]: http://chaostoolkit.org
 
 ## Install
-### [Base toxiroxy client](https://github.com/Shopify/toxiproxy#1-installing-toxiproxy)
-1. Install the [Toxiproxy base client]((https://github.com/Shopify/toxiproxy/releases)
+1. Install the [Toxiproxy base client](https://github.com/Shopify/toxiproxy/releases)
 2. Install the [Toxiproxy CLI](https://github.com/Shopify/toxiproxy/releases)
 
 ### Driver
@@ -26,7 +25,7 @@ $ pip install -U chaostoolkit-toxiproxy
 ## Usage
 
 ### Configuration
-First, run the Toxiproxy base client locally to create a localhost:8474 host on your computer. Then [create a proxy](https://github.com/Shopify/toxiproxy#2-populating-toxiproxy).
+First, run the Toxiproxy base client locally to create a `localhost:8474` host on your computer. Then [create a proxy](https://github.com/Shopify/toxiproxy#2-populating-toxiproxy).
 
 Next, to start using the actions and probes all you need to do is add the toxiproxy host with "toxiproxy_host" as the key, and optionally the port with "toxiproxy_port" as the key, to the configuration section in your experiment json. If not provided the port defaults to 8474.
 
