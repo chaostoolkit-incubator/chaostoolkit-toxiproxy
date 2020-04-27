@@ -29,11 +29,25 @@ First, run the Toxiproxy base client locally to create a `localhost:8474` host o
 
 Next, to start using the actions and probes all you need to do is add the toxiproxy host with "toxiproxy_host" as the key, and optionally the port with "toxiproxy_port" as the key, to the configuration section in your experiment json. If not provided the port defaults to 8474.
 
-Example in experiment.json
+Alternatively, if toxiproxy api is accessible using a reverse proxy, you can use `toxiproxy_url` setting.
+
+Example using `toxiproxy_host` in experiment.json
 
 ```json
 "configuration": {
     "toxiproxy_host" : "10.124.23.183",
+    "some_environment_variable": {
+      "type": "environment",
+      "key": "ENVIRONMENT_VARIABLE"
+    }
+  },
+```
+
+Example using `toxiproxy_url` in experiment.json
+
+```json
+"configuration": {
+    "toxiproxy_url" : "http://mydomain.com:8080/path-to-toxiproxy-api",
     "some_environment_variable": {
       "type": "environment",
       "key": "ENVIRONMENT_VARIABLE"
