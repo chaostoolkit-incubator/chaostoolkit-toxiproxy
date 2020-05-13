@@ -82,11 +82,18 @@ def reset(configuration: Configuration) -> int:
 
 
 def build_baseUrl(configuration: Configuration) -> str:
+    """
+    Constructs toxiproxy baseURL using variables from configuration.
+    """
     toxiproxy_host = configuration.get("toxiproxy_host")
     toxiproxy_port = configuration.get("toxiproxy_port")
-    if not toxiproxy_port:
-        toxiproxy_port = 8474
-    url = "http://{}:{}".format(toxiproxy_host, toxiproxy_port)
+    toxiproxy_url = configuration.get("toxiproxy_url")
+    if not toxiproxy_url:
+        if not toxiproxy_port:
+            toxiproxy_port = 8474
+        url = "http://{}:{}".format(toxiproxy_host, toxiproxy_port)
+    else:
+        url = toxiproxy_url
     logger.debug("Calculated toxiproxy URL is: {}".format(url))
     return url
 

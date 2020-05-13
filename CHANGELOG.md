@@ -4,6 +4,10 @@
 
 [Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.2.1...HEAD
 
+### Added
+
+- Use `toxiproxy_url` for defining toxiproxy-api base URL.
+
 ## [0.2.1][]
 
 [0.2.1]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.2.0...0.2.1
