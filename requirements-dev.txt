@@ -1,7 +1,12 @@
 coverage
 pycodestyle
-pytest>=2.8
+pytest
 pytest-cov
 pytest-sugar
 mock
-tox==2.7.0
+tox
+black
+flake8
+pyflakes==2.4.0
+isort
+
