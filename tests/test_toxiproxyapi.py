@@ -1,9 +1,9 @@
-import chaostoxi.toxiproxyapi as toxiproxyapi
 import unittest
 
+import chaostoxi.toxiproxyapi as toxiproxyapi
 
-class TestActionMethods (unittest.TestCase):
 
+class TestActionMethods(unittest.TestCase):
     def test_build_baseUrl(self):
         configuration = {"toxiproxy_host": "localhost", "toxiproxy_port": "8888"}
         expected_baseUrl = "http://localhost:8888"

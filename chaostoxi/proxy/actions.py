@@ -1,18 +1,30 @@
 # -*- coding: utf-8 -*-
-from chaoslib.types import Configuration
-
 from os import environ
+
+from chaoslib.types import Configuration
 from logzero import logger
+
 import chaostoxi.toxiproxyapi as toxiproxyapi
 
+__all__ = [
+    "create_proxy",
+    "disable_proxy",
+    "enable_proxy",
+    "modify_proxy",
+    "delete_proxy",
+    "reset",
+]
 
-__all__ = ["create_proxy", "disable_proxy", "enable_proxy", "modify_proxy",
-           "delete_proxy", "reset"]
 
-
-def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
-                 listen_host: str = '0.0.0.0', listen_port: int = 0,
-                 enabled: bool = True, configuration: Configuration = None):
+def create_proxy(
+    proxy_name: str,
+    upstream_host: str,
+    upstream_port: int,
+    listen_host: str = "0.0.0.0",
+    listen_port: int = 0,
+    enabled: bool = True,
+    configuration: Configuration = None,
+):
     """
     Creates a proxy to which toxics can be added.
     """
@@ -25,12 +37,12 @@ def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
         "name": proxy_name,
         "listen": listen_address,
         "upstream": upstream_address,
-        "enabled": enabled
+        "enabled": enabled,
     }
-    logger.debug("Creating proxy with the following configuration: {}".format(
-        str(json)))
-    proxy = toxiproxyapi.create_proxy(proxy_json=json,
-                                      configuration=configuration)
+    logger.debug(
+        "Creating proxy with the following configuration: {}".format(str(json))
+    )
+    proxy = toxiproxyapi.create_proxy(proxy_json=json, configuration=configuration)
     if not proxy:
         raise AssertionError
     return_port = proxy["listen"].split(":")[-1]
@@ -42,8 +54,7 @@ def create_proxy(proxy_name: str, upstream_host: str, upstream_port: int,
     entry = return_port
     configuration[config_key] = entry
     environ[config_key] = entry
-    logger.debug("toxyproxy port added to configuration object: {}".format(
-        return_port))
+    logger.debug("toxyproxy port added to configuration object: {}".format(return_port))
     return True
 
 
@@ -51,21 +62,27 @@ def disable_proxy(proxy_name: str, configuration: Configuration = None):
     """
     Disables the proxy, this is useful to simulate a proxied service being down.
     """
-    return modify_proxy(proxy_name=proxy_name, enabled=False,
-                        configuration=configuration)
+    return modify_proxy(
+        proxy_name=proxy_name, enabled=False, configuration=configuration
+    )
 
 
 def enable_proxy(proxy_name: str, configuration: Configuration = None):
     """
     Enables a disabled proxy.
     """
-    return modify_proxy(proxy_name=proxy_name, enabled=True,
-                        configuration=configuration)
+    return modify_proxy(
+        proxy_name=proxy_name, enabled=True, configuration=configuration
+    )
 
 
-def modify_proxy(proxy_name: str, listen_address: str = None,
-                 upstream_address: str = None, enabled: bool = None,
-                 configuration: Configuration = None):
+def modify_proxy(
+    proxy_name: str,
+    listen_address: str = None,
+    upstream_address: str = None,
+    enabled: bool = None,
+    configuration: Configuration = None,
+):
     """
     Modify the configuration of a given proxy.
     Useful to change the upstream configiuration.
@@ -73,14 +90,15 @@ def modify_proxy(proxy_name: str, listen_address: str = None,
     """
     json = {}
     if listen_address is not None:
-        json['listen'] = listen_address
+        json["listen"] = listen_address
     if upstream_address is not None:
-        json['upstream'] = upstream_address
+        json["upstream"] = upstream_address
     if enabled is not None:
-        json['enabled'] = enabled
+        json["enabled"] = enabled
     logger.debug("Modifying proxy with the following data: {}".format(str(json)))
-    proxy = toxiproxyapi.modify_proxy(proxy_name=proxy_name, proxy_json=json,
-                                      configuration=configuration)
+    proxy = toxiproxyapi.modify_proxy(
+        proxy_name=proxy_name, proxy_json=json, configuration=configuration
+    )
     if not proxy:
         logger.error("Unable to modify proxy {}".format(proxy_name))
         raise AssertionError
@@ -96,8 +114,8 @@ def delete_proxy(proxy_name: str, configuration: Configuration = None):
     """
     Removes the proxy from the system.
     """
-    return toxiproxyapi.delete_proxy(proxy_name=proxy_name,
-                                     configuration=configuration)
+    return toxiproxyapi.delete_proxy(proxy_name=proxy_name, configuration=configuration)
+
 
 def reset(configuration: Configuration = None):
     """
