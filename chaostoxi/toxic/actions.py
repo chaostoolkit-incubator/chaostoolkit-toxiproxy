@@ -33,8 +33,8 @@ def create_toxic(
     toxic_type: str,
     stream: str = "downstream",
     toxicity: float = 1.0,
-    attributes: Dict[str, Any] = None,  # noqa: E251
-    configuration: Configuration = None,  # noqa: E251
+    attributes: Dict[str, Any] = None,
+    configuration: Configuration = None,
 ) -> bool:
     """
     Allows you to create any of the supported types of toxics

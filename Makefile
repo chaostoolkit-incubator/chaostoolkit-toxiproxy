@@ -9,7 +9,7 @@ install-dev: install
 
 .PHONY: lint
 lint:
-	flake8 chaostoxi/ tests/
+	flake8 --ignore=E251 chaostoxi/ tests/
 	isort --check-only --profile black chaostoxi/ tests/
 	black --check --diff chaostoxi/ tests/
 
