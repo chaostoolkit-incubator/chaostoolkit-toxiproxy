@@ -85,7 +85,7 @@ def create_bandwith_degradation_toxic(
     for_proxy: str, toxic_name: str, rate: int, configuration: Configuration = None
 ) -> Dict[str, Any]:
     """
-    Limit the bandwith of a  downstream connection with a toxicity of 100%.
+    Limit the bandwidth of a  downstream connection with a toxicity of 100%.
     """
     attributes = {"rate": rate}
     return create_toxic(
