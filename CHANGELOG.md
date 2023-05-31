@@ -4,6 +4,10 @@
 
 [Unreleased]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.3.1...HEAD
 
+### Changed
+
+- Fixed probes return types
+
 ## [0.3.1][]
 
 [0.3.1]: https://github.com/chaostoolkit-incubator/chaostoolkit-toxiproxy/compare/0.3.0...0.3.1
