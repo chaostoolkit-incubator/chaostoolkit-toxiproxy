@@ -7,7 +7,7 @@ import chaostoxi.toxiproxyapi as toxiproxyapi
 __all__ = ["proxy_exist", "get_proxy_attribute"]
 
 
-def proxy_exist(proxy_name: str, configuration: Configuration = None):
+def proxy_exist(proxy_name: str, configuration: Configuration = None) -> bool:
     """
     Returns True of False if a given proxy exists.
     """
@@ -24,7 +24,7 @@ def proxy_exist(proxy_name: str, configuration: Configuration = None):
 
 def get_proxy_attribute(
     proxy_name: str, attribute: str, configuration: Configuration = None
-):
+) -> str:
     """
     Returns an attribute of a specified proxy.
     """
